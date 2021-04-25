@@ -1,0 +1,9 @@
+#!/bin/bash
+on=$(xset -q | grep 'Scroll Lock:' | cut -d ":" -f 7)
+if [ $on == "off" ]; then
+   xset led named "Scroll Lock"
+   echo "turn led on was$on"
+else
+   xset -led named "Scroll Lock"
+   echo "turn led off was$on"
+fi  

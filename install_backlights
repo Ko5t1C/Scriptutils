@@ -1,0 +1,35 @@
+#!/bin/bash
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+# script pour clavier mécaniques    #
+# activation scroll lock            #
+#       propulsé par KoS_           #
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+RETURN="cd ../.."
+XMODMAP="keyboard_backlights/xmodmap"
+KEYLED="keyboard_backlights/keyled"
+#make
+if [ "$1" = "make" ] ; then
+	cd $XMODMAP ; make ; $RETURN
+	sleep 0.5
+	cd $KEYLED ; make ; $RETURN
+elif [ "$1" = "make_install" ] ; then
+	sudo cp $XMODMAP/enablexmodmap /usr/bin/
+	echo "COPING FILE $XMODMAP/enablexmodmap to /usr/bin/"
+	ls -al /usr/bin/enablexmodmap
+	sleep 0.5
+	sudo cp $KEYLED/keyled /usr/bin/
+	echo "COPING FILE $KEYLED/keyled to /usr/bin/"
+	ls -al /usr/bin/keyled
+#clean
+elif [ "$1" = "clean" ] ; then
+	cd $XMODMAP ; make clean ; $RETURN
+	sleep 0.5
+	cd $KEYLED ; make clean ; $RETURN
+#clear
+elif [ "$1" = "clear" ] ; then
+	cd $XMODMAP ; make clear ; $RETURN
+	sleep 0.5
+	cd $KEYLED ; make clear ; $RETURN
+else
+	echo "Usage: $0 make|make_install|clean|clear"
+fi

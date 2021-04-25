@@ -1,0 +1,18 @@
+#!/bin/bash
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+# script a développer pour pulseaudio #
+#       et gérer ses modules          #
+#       propulsé par KoS_             #
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+#load loopback
+if [ "$1" = "load" ] ; then
+  pactl load-module module-loopback
+#unload loopback
+elif [ "$1" = "unload" ] ; then
+  pactl unload-module module-loopback
+#list modules
+elif [ "$1" = "list" ] ; then
+  pactl list short modules
+else
+	echo "Usage: $0 load|unload|list"
+fi
