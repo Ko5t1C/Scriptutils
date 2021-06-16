@@ -1,18 +1,15 @@
 #!/bin/bash
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 # script pour clavier mécaniques    #
-# activation scroll lock            #
+# installation scroll lock backlight#
 #       propulsé par KoS_           #
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+#Variables
 RETURN="cd ../.."
 XMODMAP="keyboard_backlights/xmodmap"
 KEYLED="keyboard_backlights/keyled"
-#make
-if [ "$1" = "make" ] ; then
-	cd $XMODMAP ; make ; $RETURN
-	sleep 0.5
-	cd $KEYLED ; make ; $RETURN
-elif [ "$1" = "make_install" ] ; then
+#Fonctions
+make_install () {
 	sudo cp $XMODMAP/enablexmodmap /usr/bin/
 	echo "COPING FILE $XMODMAP/enablexmodmap to /usr/bin/"
 	ls -al /usr/bin/enablexmodmap
@@ -20,16 +17,54 @@ elif [ "$1" = "make_install" ] ; then
 	sudo cp $KEYLED/keyled /usr/bin/
 	echo "COPING FILE $KEYLED/keyled to /usr/bin/"
 	ls -al /usr/bin/keyled
-#clean
-elif [ "$1" = "clean" ] ; then
+}
+clean () {
 	cd $XMODMAP ; make clean ; $RETURN
 	sleep 0.5
 	cd $KEYLED ; make clean ; $RETURN
-#clear
-elif [ "$1" = "clear" ] ; then
+}
+clear () {
 	cd $XMODMAP ; make clear ; $RETURN
 	sleep 0.5
 	cd $KEYLED ; make clear ; $RETURN
+}
+compile_done () {
+cat << __EOF__
+ _______________________________________________________________________
+|                                                                       |
+|                       XMODMAP & KEYLED compiled                       |
+|_______________________________________________________________________|
+|_______________________________________________________________________|
+|                                                                       |
+|                       https://www.wanalike.fr                         |
+|                                                                       |
+|_______________________________________________________________________|
+|_______________________________________________________________________|
+|                        - The WanaIRCd Team -                          |
+|                                                                       |
+| * KoS_ a.k.a NiX                         kos@wanalike.fr              |
+| * Redfish a.k.a hellfire             redfish@wanalike.fr              |
+|_______________________________________________________________________|
+__EOF__
+}
+#Condition
+if [ "$1" = "make" ] ; then
+	cd $XMODMAP ; make ; $RETURN
+	sleep 0.5
+	cd $KEYLED ; make ; $RETURN
+	compile_done
+elif [ "$1" = "make_install" ] ; then
+	cd $XMODMAP ; make ; $RETURN
+	sleep 0.5
+	cd $KEYLED ; make ; $RETURN
+	make_install
+	compile_done
+elif [ "$1" = "clean" ] ; then
+	clean
+	compile_done
+elif [ "$1" = "clear" ] ; then
+ clear
+ compile_done
 else
 	echo "Usage: $0 make|make_install|clean|clear"
 fi

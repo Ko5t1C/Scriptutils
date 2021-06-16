@@ -1,2 +1,23 @@
 #!/bin/bash
-xmodmap -e 'add mod3 = Scroll_Lock'
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+# script pour clavier mécaniques    #
+# vérification scroll lock          #
+#       propulsé par KoS_           #
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+#Temps de la boucle en secondes
+TIMELOOP=5
+
+while [ 1 ]
+do
+	command=`xmodmap | grep mod3 | awk ' {print $2}'`
+	if [ "$command"  = "" ]
+	then
+		echo "Scroll_Lock n'existe pas"
+		xmodmap -e 'add mod3 = Scroll_Lock'
+	else
+		echo "Scroll_Lock existe"
+		#si n'existe pas alors on l'active
+
+	fi
+	sleep $TIMELOOP
+done

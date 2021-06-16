@@ -1,10 +1,16 @@
-#include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <string.h>
 
 void Keyled(void)
 {
-	char *binaryPath = "/bin/bash";
-	char *arg1 = "/home/kos/Scriptutils/clavier";
-	execl(binaryPath, binaryPath, arg1, NULL);
+	char *homedir = getenv("HOME");
+	if (homedir != NULL) {
+		char *binaryPath = "/bin/bash";
+		char *arg1 = "/Scriptutils/clavier";
+		/* concatene homedir (/home/user) + arg1 */
+		char *stcat = strcat(homedir, arg1);
+		/* printf("%s\n", stcat); */
+		execl(binaryPath, binaryPath, stcat, NULL);
+	}
 }

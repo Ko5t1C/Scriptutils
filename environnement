@@ -1,0 +1,2 @@
+#!/bin/bash
+printf 'Desktop: %s\nSession: %s\nDisplay_Manage: %s\n' "$XDG_CURRENT_DESKTOP" "$GDMSESSION" "$XDG_SESSION_TYPE"

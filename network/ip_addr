@@ -1,0 +1,29 @@
+#!/bin/bash
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+# script retourne 1 ou plusieurs ips  #
+#       locale, interfaces, internet  #
+#       propulsé par KoS_             #
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+# Variables
+interface=`/sbin/route | grep '^default' | grep -o '[^ ]*$'`
+locale=`/sbin/ip addr show $interface | awk -F'[ /]+' '/inet / {print $3}'`
+net=`dig +short myip.opendns.com @resolver1.opendns.com`
+
+
+# Print interface
+if [ "$1" = "interface" ] ; then
+  echo $interface
+# Print localeip
+elif [ "$1" = "locale" ] ; then
+  echo $locale
+# Print locales ip's
+elif [ "$1" = "locales" ] ; then
+  /sbin/ifconfig | grep -w inet | awk '{ print $2}'
+elif [ "$1" = "net" ] ; then
+  echo $net
+elif [ "$1" = "all" ] ; then
+  echo -e "IP locales:\n" ; /sbin/ifconfig | grep -w inet | awk '{ print $2}' ; echo -e "";  echo -e "IP publique:\n" ; echo $net ; echo -e "";
+else
+  echo -e "IP locales:\n" ; /sbin/ifconfig | grep -w inet | awk '{ print $2}' ; echo -e "";  echo -e "IP publique:\n" ; echo $net ; echo -e "\n";
+	echo "Usage: $0 interface|locale|locales|net|all"
+fi

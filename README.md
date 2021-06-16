@@ -1,8 +1,8 @@
 ## Script Utils make with ❤ by KoS_
 
-![BASH](https://tecadmin.net/tutorial/wp-content/uploads/2017/09/bash-logo.jpg)
+![BASH](https://github.com/Ko5t1C/Scriptutils/img/bash.jpg)
 
-![Langage C](https://cms-informatic.com/wp-content/uploads/2020/01/logo-langage-C.png)
+![Langage C](https://github.com/Ko5t1C/Scriptutils/img/langage_c.png)
 
 ## Table of Contents
 
